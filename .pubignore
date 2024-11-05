@@ -1,0 +1,20 @@
+# Platform-specific folders
+android/
+ios/
+linux/
+macos/
+windows/
+web/
+
+# Flutter/Dart/Pub related
+.dart_tool/
+.pub-cache/
+.pub/
+build/
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
