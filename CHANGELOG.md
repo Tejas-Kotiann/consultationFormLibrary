@@ -4,3 +4,5 @@
 - Initial release with core functionality.
 ## [0.2.0] - 2024-11-05
 - change sdk version.
+## [0.3.0] - 2024-11-05
+- added adaptor.

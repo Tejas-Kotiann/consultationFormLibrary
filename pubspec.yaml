@@ -1,6 +1,6 @@
 name: consultation_form_library
 description: "Consultation form library."
-version: 0.2.0
+version: 0.3.0
 repository: https://github.com/Tejas-Kotiann/consultationFormLibrary
 environment:
   sdk: ^3.5.0
