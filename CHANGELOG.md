@@ -6,3 +6,5 @@
 - change sdk version.
 ## [0.3.0] - 2024-11-05
 - added adaptor.
+## [0.4.0] - 2024-11-06
+- updated adaptor contracts.
