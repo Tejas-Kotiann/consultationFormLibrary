@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import '../adapters/consult-adapter.dart';
+import '../adapters/consult_adapter.dart';
 import '../models/consult.dart';
 
-//This form know what to use from consult superset.
 class OPDConsultForm extends StatefulWidget {
   final IConsultAdapter adapter;
 
@@ -25,6 +24,9 @@ class _OPDConsultFormState extends State<OPDConsultForm> {
   }
 
   Future<void> _loadExistingConsult() async {
+    print(widget.adapter.consultId);
+    widget.adapter.consultId = "updatedconsultId";
+    print(widget.adapter.consultId);
     setState(() {
       _existingConsult = widget.adapter.load();
     });
@@ -36,6 +38,9 @@ class _OPDConsultFormState extends State<OPDConsultForm> {
         firstName: formValues?['firstName'],
         lastName: formValues?['lastName'],
         phoneNumber: int.parse(formValues?['phoneNumber']),
+        chiefComplaint: formValues?['chiefComplaint'],
+        clinicalFindings: formValues?['clinicalFindings'],
+        treatmentPlan: formValues?['treatmentPlan'],
       );
       await widget.adapter.save(newConsult);
       if (!mounted) return;
@@ -71,7 +76,7 @@ class _OPDConsultFormState extends State<OPDConsultForm> {
             padding: const EdgeInsets.all(16.0),
             child: FormBuilder(
               key: _formKey,
-              child: Column(
+              child: ListView(
                 children: [
                   FormBuilderTextField(
                     name: 'firstName',
@@ -97,6 +102,33 @@ class _OPDConsultFormState extends State<OPDConsultForm> {
                       FormBuilderValidators.required(),
                       FormBuilderValidators.numeric(),
                     ]),
+                  ),
+                  // Chief Complaint TextArea
+                  FormBuilderTextField(
+                    name: 'chiefComplaint',
+                    initialValue: existingConsult?.chiefComplaint ?? '',
+                    decoration:
+                        const InputDecoration(labelText: 'Chief Complaint'),
+                    maxLines: 3,
+                    validator: FormBuilderValidators.required(),
+                  ),
+                  // Clinical Findings TextArea
+                  FormBuilderTextField(
+                    name: 'clinicalFindings',
+                    initialValue: existingConsult?.clinicalFindings ?? '',
+                    decoration:
+                        const InputDecoration(labelText: 'Clinical Findings'),
+                    maxLines: 3,
+                    validator: FormBuilderValidators.required(),
+                  ),
+                  // Treatment Plan TextArea
+                  FormBuilderTextField(
+                    name: 'treatmentPlan',
+                    initialValue: existingConsult?.treatmentPlan ?? '',
+                    decoration:
+                        const InputDecoration(labelText: 'Treatment Plan'),
+                    maxLines: 3,
+                    validator: FormBuilderValidators.required(),
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(

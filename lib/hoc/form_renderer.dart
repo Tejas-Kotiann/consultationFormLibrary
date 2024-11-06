@@ -1,4 +1,4 @@
-import 'package:consultation_form_library/adapters/consult-adapter.dart';
+import 'package:consultation_form_library/adapters/consult_adapter.dart';
 import 'package:consultation_form_library/forms/_anc_consult_form.dart';
 import 'package:consultation_form_library/forms/_opd_consult_form.dart';
 import 'package:flutter/material.dart';

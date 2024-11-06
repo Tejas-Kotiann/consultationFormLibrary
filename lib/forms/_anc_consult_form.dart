@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import '../adapters/consult-adapter.dart';
+import '../adapters/consult_adapter.dart';
 import '../models/consult.dart';
 
-//This form know what to use from consult superset.
 class ANCConsultForm extends StatefulWidget {
   final IConsultAdapter adapter;
 
@@ -36,6 +35,9 @@ class _ANCConsultFormState extends State<ANCConsultForm> {
         firstName: formValues?['firstName'],
         lastName: formValues?['lastName'],
         phoneNumber: int.parse(formValues?['phoneNumber']),
+        pregnancyHistory: formValues?['pregnancyHistory'],
+        symptomsAndComplaints: formValues?['symptomsAndComplaints'],
+        careRecommendations: formValues?['careRecommendations'],
       );
       await widget.adapter.save(newConsult);
       if (!mounted) return;
@@ -71,7 +73,7 @@ class _ANCConsultFormState extends State<ANCConsultForm> {
             padding: const EdgeInsets.all(16.0),
             child: FormBuilder(
               key: _formKey,
-              child: Column(
+              child: ListView(
                 children: [
                   FormBuilderTextField(
                     name: 'firstName',
@@ -98,12 +100,35 @@ class _ANCConsultFormState extends State<ANCConsultForm> {
                       FormBuilderValidators.numeric(),
                     ]),
                   ),
+                  FormBuilderTextField(
+                    name: 'pregnancyHistory',
+                    initialValue: existingConsult?.pregnancyHistory ?? '',
+                    decoration: const InputDecoration(
+                        labelText: 'Pregnancy History'),
+                    maxLines: 3,
+                    validator: FormBuilderValidators.required(),
+                  ),
+                  FormBuilderTextField(
+                    name: 'symptomsAndComplaints',
+                    initialValue: existingConsult?.symptomsAndComplaints ?? '',
+                    decoration: const InputDecoration(
+                        labelText: 'Symptoms and Complaints'),
+                    maxLines: 3,
+                    validator: FormBuilderValidators.required(),
+                  ),
+                  FormBuilderTextField(
+                    name: 'careRecommendations',
+                    initialValue: existingConsult?.careRecommendations ?? '',
+                    decoration: const InputDecoration(
+                        labelText: 'Care Recommendations'),
+                    maxLines: 3,
+                    validator: FormBuilderValidators.required(),
+                  ),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState?.saveAndValidate() ?? false) {
                         final formValues = _formKey.currentState?.value;
-
                         _handleSubmit(formValues);
                       }
                     },
